@@ -1,0 +1,97 @@
+---
+all:
+  children:
+    proxmox:
+      hosts:
+        pve01:
+          ansible_host: 172.16.3.1
+        pve02:
+          ansible_host: 172.16.3.2
+        pve03:
+          ansible_host: 172.16.3.3
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+        ansible_user: root
+    services:
+      children:
+        haproxy:
+          hosts:
+            lb01:
+              ansible_host: 192.168.5.10
+              node: pve01
+              vmid: 260
+            lb02:
+              ansible_host: 192.168.5.11
+              node: pve02
+              vmid: 261
+            lb03:
+              ansible_host: 192.168.5.12
+              node: pve03
+              vmid: 262
+        isc_dhcp_server:
+          hosts:
+            dhcp01:
+              ansible_host: 192.168.5.13
+              node: pve02
+              vmid: 263
+            dhcp02:
+              ansible_host: 192.168.5.14
+              node: pve03
+              vmid: 264
+        mariadb_galera_cluster:
+          hosts:
+            db01:
+              ansible_host: 192.168.5.7
+              memory: '8192'
+              node: pve01
+              vmid: 257
+            db02:
+              ansible_host: 192.168.5.8
+              memory: '8192'
+              node: pve02
+              vmid: 258
+            db03:
+              ansible_host: 192.168.5.9
+              memory: '8192'
+              node: pve03
+              vmid: 259
+        nginx:
+          hosts:
+            web01:
+              ansible_host: 192.168.5.15
+              node: pve02
+              vmid: 265
+            web02:
+              ansible_host: 192.168.5.16
+              node: pve03
+              vmid: 266
+        pdns_recursor:
+          hosts:
+            dns01:
+              ansible_host: 192.168.5.1
+              node: pve01
+              vmid: 251
+            dns02:
+              ansible_host: 192.168.5.2
+              node: pve02
+              vmid: 252
+            dns03:
+              ansible_host: 192.168.5.3
+              node: pve03
+              vmid: 253
+        pdns_server:
+          hosts:
+            dns04:
+              ansible_host: 192.168.5.4
+              node: pve01
+              vmid: 254
+            dns05:
+              ansible_host: 192.168.5.5
+              node: pve02
+              vmid: 255
+            dns06:
+              ansible_host: 192.168.5.6
+              node: pve03
+              vmid: 256
+  vars:
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

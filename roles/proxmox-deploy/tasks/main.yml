@@ -1,0 +1,25 @@
+---
+- delegate_to: pve01
+  name: Deploy container for service
+  proxmox:
+    api_host: '{{ api_host }}'
+    api_password: '{{ api_password }}'
+    api_user: '{{ api_user }}'
+    cores: '{{ cores }}'
+    hostname: '{{ inventory_hostname }}'
+    memory: '{{ memory }}'
+    nameserver: '{{ nameserver }}'
+    netif: '{"net0":"name=eth0,ip={{ ansible_host }}{{ netmask }},bridge=vmbr0,tag={{ vlan }}"}'
+    node: '{{ node }}'
+    onboot: 'yes'
+    ostemplate: '{{ template }}'
+    pool: '{{ pool }}'
+    proxmox_default_behavior: no_defaults
+    pubkey: '{{ pubkey }}'
+    searchdomain: '{{ searchdomain }}'
+    state: '{{ state }}'
+    storage: '{{ storage }}'
+    swap: '{{ swap }}'
+    timeout: '120'
+    unprivileged: 'yes'
+    vmid: '{{ vmid }}'

@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Duncan Forsythe
+  description: purges an lxc container on a proxmox cluster for each given host.
+  company: Knightfall Systems LLC
+  license: MIT
+
+  min_ansible_version: 2.10
+
+  platforms:
+  - name: Proxmox Virtual Environment
+    versions:
+    - 6.3
+
+  galaxy_tags: []
+
+dependencies: []

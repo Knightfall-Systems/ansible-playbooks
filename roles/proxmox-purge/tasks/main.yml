@@ -1,0 +1,23 @@
+---
+# tasks file for proxmox-purge
+- delegate_to: '{{ node }}'
+  name: Stop container before purge
+  proxmox:
+    api_host: '{{ api_host }}'
+    api_password: '{{ api_password }}'
+    api_user: '{{ api_user }}'
+    node: '{{ node }}'
+    proxmox_default_behavior: no_defaults
+    state: stopped
+    vmid: '{{ vmid }}'
+
+- delegate_to: '{{ node }}'
+  name: Purge container from cluster
+  proxmox:
+    api_host: '{{ api_host }}'
+    api_password: '{{ api_password }}'
+    api_user: '{{ api_user }}'
+    node: '{{ node }}'
+    proxmox_default_behavior: no_defaults
+    state: absent
+    vmid: '{{ vmid }}'
